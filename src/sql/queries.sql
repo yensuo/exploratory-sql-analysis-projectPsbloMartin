@@ -119,4 +119,22 @@ ON observations.region_id = regions.id;
 -- Your query here;
 -- Muestra el nombre científico de cada especie registrada (species.scientific_name).
 -- Relaciona observations con species usando species_id.
+SELECT species.scientific_name , species_id FROM observations
+INNER JOIN species ON  observations.species_id = species.id ;
 
+-- MISSION 12
+-- Your query here:
+-- ¿Cuál es la especie más observada por cada región?
+-- Agrupa por región y especie, y ordena por cantidad.
+--SELECT regions.name, species.scientific_name, COUNT(*) FROM observations -- 
+
+--INNER JOIN species ON observations.species_id = species.id
+--INNER JOIN regions ON observatios.region_id = regions.id
+--GROUP BY regions.name, species.scientific_name
+--ORDER BY regions.name, COUNT(*) DESC;
+SELECT regions.name, species.scientific_name, COUNT(*) FROM observations-- SELECT scientific_name , regions.name FROM species??
+--  inner join observations? -> no furula, extraer de observations siemrpre y unir a ella
+INNER JOIN species ON observations.species_id = species.id
+INNER JOIN regions ON observations.region_id = regions.id --uno species y regions
+GROUP BY regions.name, species.scientific_name -- agrupo por region y especie como pide el enunciado
+ORDER BY  COUNT(*)  DESC; --ordeno de mas a menos observaciones que ha tenido cada especie 
